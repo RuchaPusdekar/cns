@@ -1,0 +1,54 @@
+key=input()
+msg=''
+with open('plain.txt') as file:
+  lines=file.readlines()
+  for line in lines:
+    for letter in line.lower():
+      msg+=letter
+msg_arr=[]
+enc_array=[]
+msg=msg.replace(" ","#")
+rem=len(msg)%len(key)
+
+#encryption
+
+for i in range(len(key)-rem):
+  msg+='x'
+for i in range(0,len(msg),len(key)):
+  msg_arr.append(msg[i:i+len(key)])
+#print(msg_arr)
+
+for i in range(len(key)):
+  encrypted=""
+  for j in range(len(msg_arr)):
+    encrypted+=msg_arr[j][i]
+  enc_array.append(encrypted)
+#print(encrypted)
+li=list(key)
+ 
+li.sort()
+final=''
+for i in li:
+  final+=enc_array[key.index(i)]
+print("ENCRYPTED MESSAGE: ")
+print(final)
+#Decryption
+dict={}
+li=[]
+li=list(key)
+li.sort()
+#print(li)
+for c in li:
+  dict[c]=''
+sub=len(final)//len(key)
+j=0
+for c in li:
+  dict[c]+=final[j:j+sub]
+  j+=sub
+#print(dict)
+print("DECRYPTED MESSAGE: ")
+for i in range(sub):
+  for c in key:
+    print(dict[c][i],end='')
+with open('code.txt',"a") as file2:
+      file2.write(final)

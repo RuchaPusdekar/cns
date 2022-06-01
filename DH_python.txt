@@ -1,0 +1,51 @@
+def calculatey(alpha,xab,q):
+  yab=(alpha**xab)%q
+  return yab
+
+def f1(lst,q):
+  for i in range(q-1):
+    for j in range(q-1):
+      m=i+1
+      n=j+1
+      r=(m**n)%q
+      if r not in lst[i]:
+        lst[i].append(r)
+  p=[]
+  for i in range(q-1):
+    if len(lst[i])==(q-1):
+      p.append(i+1)
+  return (p)    
+
+q=int(input("Enter q:"))
+#calculate primary root
+lst=[[] for _ in range(q-1)]
+res=f1(lst,q)
+print(res)
+
+#calculate alpha
+print("Choose Alpha: ")
+rand_idx = int(input())
+alpha = res[rand_idx]
+print("Alpha: ",alpha)
+
+#calculate ya
+print("Calculate xa range from 1 to ",q-1)
+xa=int(input("enter xa:"))
+print("Calculate value of ya:")
+ya=calculatey(alpha,xa,q)
+print("ya:",ya)
+
+#calculate yb
+print("Calculate xb range from 1 to ",q-1)
+xb=int(input("enter xb:"))
+print("Calculate value of yb:")
+yb=calculatey(alpha,xb,q)
+print("yb:",yb)
+
+print("private key of user A is:")
+ka=(yb**xa)%q
+print(ka)
+
+print("private key of user B is:")
+kb=(ya**xb)%q
+print(kb)

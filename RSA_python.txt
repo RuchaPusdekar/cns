@@ -1,0 +1,27 @@
+p=int(input("Ënter p: "))
+q=int(input("Ënter q: "))
+e = int(input("Enter the value of e: "))
+m = int(input("Enter the value of m: "))
+
+n=p*q
+print("value of n is ",n)
+phi_of_n=(p-1)*(q-1)
+print("value of phi_n is ",phi_of_n)
+
+i=0
+d=0
+
+while 1:
+  i+=1
+  if(phi_of_n*i+1)%e==0:
+    d=(phi_of_n*i+1)//e
+    break
+print("PUBLIC KEY",e,n)
+print("private key",d,n)
+
+
+c=(m**e)%n 
+print("c= ",c)
+
+m=(c**d)%n
+print("m= ",m)

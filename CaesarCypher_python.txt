@@ -1,0 +1,43 @@
+with open('plain.txt') as files:
+  lines=files.readlines()
+  alphabet=[]
+  for i in range(26):
+      alphabet.append(chr(ord('a')+i))
+  for i in range(len(lines)):
+    str=lines[i]
+    if(i<(len(lines)//2)):
+      k=3
+    else:
+      k=5    
+    forfile=''
+    for char in str:
+      encstr=''
+      if char.isalpha():
+        char=char.lower()
+        encstr+=alphabet[(alphabet.index(char)+k)%26]
+        forfile+=encstr
+        print(encstr,end='')
+      else:
+        print(char,end='')
+        forfile+=char
+    with open('encode.txt',"a") as file2:
+      file2.write(forfile) 
+    
+
+print('\n\n\n')
+
+decstr=''
+with open('encode.txt') as file3:
+  lines=file3.readlines()
+  for i in range(len(lines)):
+    word=lines[i]
+    if i<(len(lines))//2:
+      k=3
+    else:
+      k=5
+    for char in word:
+      if char.isalpha():
+        decstr+=alphabet[(alphabet.index(char)-k)%26]
+      else:
+        decstr+=char
+print(decstr)       

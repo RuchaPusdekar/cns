@@ -1,0 +1,39 @@
+#include <iostream>
+#include <tuple>        
+using namespace std;
+ 
+
+tuple<int, int, int> extended_gcd(int a, int b)
+{
+    if (a == 0) {
+        return make_tuple(b, 0, 1);
+    }
+ 
+    int gcd, x, y;
+ 
+    
+    tie(gcd, x, y) = extended_gcd(b % a, a);
+ 
+    return make_tuple(gcd, (y - (b/a) * x), x);
+}
+ 
+int main()
+{
+    int a,b;
+    cout<<"Enter the value of a : ";
+    cin>>a;
+    cout<<"Enter the value of b : ";
+    cin>>b;
+ 
+    tuple<int, int, int> t = extended_gcd(a, b);
+ 
+    int gcd = get<0>(t);
+    int x = get<1>(t);
+    int y = get<2>(t);
+ 
+    cout << "The GCD is " << gcd << endl;
+    cout << "x = " << x << " y = " << y << endl;
+    cout << a << "*" << x << " + " << b << "*" << y << " = " << gcd << endl;
+ 
+    return 0;
+}

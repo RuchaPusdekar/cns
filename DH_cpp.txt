@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+using namespace std;
+
+long long int power(long long int a, long long int b,
+	long long int P)
+{
+	if (b == 1)
+		return a;
+
+	else
+		return (((long long int)pow(a, b)) % P);
+}
+
+int main()
+{
+	long long int P=0, G=0, x=0, a=0, y=0, b=0, ka=0, kb=0;
+
+	cout<<"Enter the value of P : ";
+	cin >> P;
+	
+	cout<<"Enter the value of G : ";
+	cin >> G;
+
+	cout<<"Enter the private key a for Alice : ";
+	cin >> a;
+	
+	x = power(G, a, P); 
+
+	cout<<"Enter the private key b for Bob : ";
+	cin >> b;
+	
+	y = power(G, b, P); 
+	ka = power(y, a, P); 
+	kb = power(x, b, P); 
+	cout << endl << "---------------------------------------------\n";
+	cout<<"Secret key for the Alice is : "<< ka<<endl;
+	cout << "Secret Key for the Bob is : " << kb ;
+	cout << endl << "---------------------------------------------\n";
+	cin >> a;
+	return 0;
+}
